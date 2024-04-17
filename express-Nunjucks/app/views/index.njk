@@ -27,6 +27,26 @@
 					<a href="#" class="btn btn-danger">Excluir</a>
 				</td>
 			</tr>
+
+		{% for musica in musicas %}
+			<tr>
+				<td>{{musica.id}}</td>
+				<td>{{musica.home}}</td>
+				<td>{{musica.artista}}</td>
+				<td>
+					{% for i in range(0,musicas.estrelas) %}
+						<span class="glyphicon glyphicon-star"></span>
+					{% endfor %}
+				</td>
+				<td>
+					<a href="/edit/{{musica.id}}" class="btn btn-primary">Editar</a>
+					<a href="/delete/{{musica.id}}" class="btn btn-danger">Excluir</a>
+				
+
+				</td>
+
+			</tr>	
+		{% endfor %}
 		</tbody>
 	</table>
 
