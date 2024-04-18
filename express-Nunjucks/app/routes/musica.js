@@ -65,14 +65,13 @@ router.delete('/delete/:id',(req,res,next)=>{
 	.where('id',id)
 	.delete()
 	.then((result)=>{
-
 		if(result===0){
 			return res.send(400);
 		}
-
-		res.render('/');
+		res.redirect('/');
 	},next);
-
 });
+
+
 
 module.exports = router;

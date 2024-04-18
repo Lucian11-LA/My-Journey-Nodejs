@@ -1,11 +1,10 @@
 {% extends "layout.njk" %}
 
 {% block pagina %}
-	//codigo da pagina
 	
 	<h1>Cadastro de Musicas</h1>
 	
-	<form>
+	<form action="/" method="POST">
 		<div class="form-group">
 			<label for="nome">Nome da musica</label>
 			<input type="text" class="form-control" name="nome" id="nome" placeholder="Nome">
