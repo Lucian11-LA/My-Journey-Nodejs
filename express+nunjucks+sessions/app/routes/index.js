@@ -2,32 +2,27 @@ var express = require('express')
 var router =express.Router();
 
 router.get('/',function(req,res,next){
-	if(req.session.nome){
+	if(req.isAuthenticated()){
 		res.redirect('/home');
 	}else{
 		res.render('login');
 	}
 })
 
-router.post('/',(req,res,next)=>{
-	if(req.body.nome == 'admin' && req.body.senha == '1234'){
-		req.session.nome = req.body.nome;
-		res.redirect('/home');
-	}else{
-		res.redirect('/');
-	}
-});
-
+router.post('/',passport.authenticate('local',{
+	sucessRedirect: '/home',
+	failureRedirect: '/error'
+}));
 
 router.get('/home',(req,res,next)=>{
-	if(req.session.nome == 'admin'){
-		res.render('home',{
-			session: req.session,
-			usuario: req.session.nome
-		});
-	}else{
-		res.redirect('/');
+	if(!req.isAuthenticated()){
+		return res.redirect('/');
 	}
+
+	res.render('home',{
+		session: req.session,
+		usuario: req.user
+	})
 });
 
 router.get('/logout',(req,res,next)=>{

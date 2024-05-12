@@ -10,6 +10,9 @@ var methodOverride = require('method-override');
 var session = require('express-session');
 var app = express();
 
+var passport = require('passport');
+require('./passport');
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'njk');
 var njk = expressNunjucks(app,{watch:true, noCache: true});
@@ -19,6 +22,9 @@ app.use(session({
   resave: false,
   saveUnitialized: false
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
